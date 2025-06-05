@@ -51,6 +51,22 @@
         </div>
 
     </main>
+    <dialog id="modalAgregar">
+        <article>
+            <header>
+                <a href="" class="close" id="btnClose"></a>
+                <h3>Agregar integrante</h3>
+            </header>
+            <form id="frmAgregar" style="border-radius: 20px;">
+                <input type="text" id="txtNombre" placeholder="Nombre" required>
+                <input type="text" id="txtApellido" placeholder="Apellido" required>
+                <input type="email" id="txtEmail" placeholder="Email" required>
+                <input type="text" id="txtCodigo" placeholder="Codigo" required>
+                <button type="submit" class="contrast">Guardar</button>
+
+            </form>
+        </article>
+     </dialog>
     <!-- Boton flotante para agregar integrantes -->
     <button id="btn-agregar-integrante" class="add-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -61,6 +77,7 @@
             <path d="M12 8v8" />
         </svg>
     </button>
+    
     <script src="/js/index.js"></script>
 </body>
 
