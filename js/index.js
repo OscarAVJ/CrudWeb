@@ -35,3 +35,36 @@ function showTeamMembers (data){
     });
 }
 getTeamMembers();
+
+///Proceso para agregar integrante
+const modal = document.querySelector("#modalAgregar")
+const btnAgregar = document.querySelector("#btnAgregar");
+const btnCerrarModal = document.querySelector("#btnClose");
+btnAgregar.addEventListener("click", ()=>{
+    ///Mostrar el modal
+    modal.showModal();
+})
+btnCerrarModal.addEventListener("click",()=>{
+    modal.closest();
+})
+///Agregar nuevo integrante desde el formulario
+document.querySelector("#frmAgregar").addEventListener("submit",async e =>{
+    e.preventDefault();///e reperesnta a submit y evita el formulario se envie de un solo
+    ///Capturar los datos del formulario
+    const nombre = document.querySelector("#txtNombre").value.trim();
+    const apellido = document.querySelector("#txtApellido").value.trim();
+    const email = document.querySelector("#txtEmail").value.trim();
+    const rol = document.querySelector("#txtRol").value.trim();
+
+    ///Validar los datos
+    if(!nombre || !apellido || !email || !rol){
+        alert("Todos los campos son obligatorios");
+        return;
+    }
+    ///Llamar a la API para agregar el nuevo integrante
+    const response = await fetch(API_URL,{
+        method: "POST",
+        
+    })
+})
+
