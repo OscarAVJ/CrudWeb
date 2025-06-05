@@ -5,3 +5,27 @@
 .menu ul:hover{
     background-color: greenyellow;
 }
+.add-btn{
+    position: fixed;     /*El boton queda flotante */
+    bottom: 30px;      /*Posicion en la parte inferior */
+    right: 40px;      /*Posicion a la derecha */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(199, 199, 199, 0.5);  
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    z-index: 1001;
+    transition: transform 0.3s ease;
+}
+.add-btn:hover{
+    transform: scale(1,1); /* Efecto de zoom al pasar el mouse */
+}
+.scrollable-table{
+    overflow-x:auto ;
+}
+button{
+    margin: 4px;
+}

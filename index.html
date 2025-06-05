@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.jade.min.css">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <title>Document</title>
@@ -17,7 +16,6 @@
                 <li><b>Expo managment system</b></li>
             </ul>
             <ul>
-                <li><a href="#">Integrantes</a></li>
                 <li><a href="#">Tareas</a></li>
                 <li><a href="#">Mi perfil</a></li>
                 <li><a href="#" role="button">Cerrar sesion</a></li>
@@ -34,23 +32,35 @@
     </header>
     <main class="container">
         <h2>Integrantes de equipo</h2>
-        <table id="tabla_equipo" class="overflow-auto striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Correo</th>
-                    <th>Codigo</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aqui van las filas que iteraremos con javascript provenientes de la API -->
-            </tbody>
+        <div class="scrollable-table">
+            <table id="tabla_equipo" class="overflow-auto striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo</th>
+                        <th>Codigo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aqui van las filas que iteraremos con javascript provenientes de la API -->
+                </tbody>
+            </table>
+        </div>
 
-        </table>
     </main>
+    <!-- Boton flotante para agregar integrantes -->
+    <button id="btn-agregar-integrante" class="add-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-circle-plus-icon lucide-circle-plus">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M8 12h8" />
+            <path d="M12 8v8" />
+        </svg>
+    </button>
     <script src="/js/index.js"></script>
 </body>
 
