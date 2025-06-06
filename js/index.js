@@ -45,7 +45,7 @@ btnAgregar.addEventListener("click", ()=>{
     modal.showModal();
 })
 btnCerrarModal.addEventListener("click",()=>{
-    modal.closest();
+    modal.close();
 })
 ///Agregar nuevo integrante desde el formulario
 document.querySelector("#frmAgregar").addEventListener("submit",async e =>{
@@ -54,7 +54,7 @@ document.querySelector("#frmAgregar").addEventListener("submit",async e =>{
     const nombre = document.querySelector("#txtNombre").value.trim();
     const apellido = document.querySelector("#txtApellido").value.trim();
     const email = document.querySelector("#txtEmail").value.trim();
-    const rol = document.querySelector("#txtRol").value.trim();
+    const rol = document.querySelector("#txtCodigo").value.trim();
 
     ///Validar los datos
     if(!nombre || !apellido || !email || !rol){
@@ -63,8 +63,29 @@ document.querySelector("#frmAgregar").addEventListener("submit",async e =>{
     }
     ///Llamar a la API para agregar el nuevo integrante
     const response = await fetch(API_URL,{
-        method: "POST",
-        
-    })
+        method: "POST", ///Tipo de peticion a realizar
+        headers: {
+            'Content-Type': 'application/json'///Esto incida que vamos a enviar un JSON
+        },
+        body: JSON.stringify({///Convertir el objeto a JSON
+            ///Stringify convierte un objeto a un string
+            nombre, 
+            apellido, 
+            email,
+            rol
+        })
+
+    });
+    ///Validar la respuesta
+    if(response.ok){
+        alert("Integrante agregado correctamente");
+        ///Limpiar el formulario
+        document.querySelector("#frmAgregar").reset();
+        ///Cerrar el modal
+        modal.close();
+        getTeamMembers(); ///Actualizar la tabla
+    }else{
+        alert("Error al agregar el integrante");
+    }
 })
 
