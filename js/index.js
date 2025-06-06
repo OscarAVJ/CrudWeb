@@ -28,7 +28,7 @@ function showTeamMembers (data){
             <td>${element.rol}</td>
             <td>
                 <button>Editar</button>
-                <button>Eliminar</button>
+                <button onclick="deleteMember(${element.id})">Eliminar</button>
             </td>
         </tr>
         `;
@@ -88,4 +88,15 @@ document.querySelector("#frmAgregar").addEventListener("submit",async e =>{
         alert("Error al agregar el integrante");
     }
 })
+async function deleteMember(id){
+    const confirmacion = confirm("¿Estás seguro de eliminar este integrante?");
+    if(confirmacion){
+        await fetch(`${API_URL}/${id}`,{
+            method: "DELETE"
+        });
+        ///Recargar la tabla
+        getTeamMembers();
+    }
+}
+
 
