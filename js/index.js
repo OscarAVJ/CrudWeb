@@ -10,7 +10,7 @@ async function getTeamMembers() {
     showTeamMembers(data);
 }
 ///Funcion para recibir JSON
-function showTeamMembers (data){
+function showTeamMembers(data) {
     ///Aca podemos hacer una peticion pero a id, a clase etc
     ///Con # llamas al id y con . a la clase y con un enlace para su tbody
     const table = document.querySelector("#tabla_equipo tbody")
@@ -27,7 +27,7 @@ function showTeamMembers (data){
             <td>${element.email}</td>
             <td>${element.rol}</td>
             <td>
-                <button>Editar</button>
+                <button onclick="openEditModal('${element.id}', '${element.nombre}', '${element.apellido}', '${element.email}', '${element.rol}')">Editar</button>
                 <button onclick="deleteMember(${element.id})">Eliminar</button>
             </td>
         </tr>
@@ -35,20 +35,19 @@ function showTeamMembers (data){
     });
 }
 getTeamMembers();
-
 ///Proceso para agregar integrante
 const modal = document.querySelector("#modalAgregar")
 const btnAgregar = document.querySelector("#btnAgregar");
 const btnCerrarModal = document.querySelector("#btnClose");
-btnAgregar.addEventListener("click", ()=>{
+btnAgregar.addEventListener("click", () => {
     ///Mostrar el modal
     modal.showModal();
 })
-btnCerrarModal.addEventListener("click",()=>{
+btnCerrarModal.addEventListener("click", () => {
     modal.close();
 })
 ///Agregar nuevo integrante desde el formulario
-document.querySelector("#frmAgregar").addEventListener("submit",async e =>{
+document.querySelector("#frmAgregar").addEventListener("submit", async e => {
     e.preventDefault();///e reperesnta a submit y evita el formulario se envie de un solo
     ///Capturar los datos del formulario
     const nombre = document.querySelector("#txtNombre").value.trim();
@@ -57,41 +56,45 @@ document.querySelector("#frmAgregar").addEventListener("submit",async e =>{
     const rol = document.querySelector("#txtCodigo").value.trim();
 
     ///Validar los datos
-    if(!nombre || !apellido || !email || !rol){
+    if (!nombre || !apellido || !email || !rol) {
         alert("Todos los campos son obligatorios");
         return;
     }
     ///Llamar a la API para agregar el nuevo integrante
-    const response = await fetch(API_URL,{
+    const response = await fetch(API_URL, {
         method: "POST", ///Tipo de peticion a realizar
         headers: {
             'Content-Type': 'application/json'///Esto incida que vamos a enviar un JSON
         },
         body: JSON.stringify({///Convertir el objeto a JSON
             ///Stringify convierte un objeto a un string
-            nombre, 
-            apellido, 
+            nombre,
+            apellido,
             email,
             rol
         })
 
     });
     ///Validar la respuesta
-    if(response.ok){
-        alert("Integrante agregado correctamente");
+    if (response.ok) {
+        Swal.fire({
+            title: "BIENNN!",
+            text: "Usuario expo agregado!",
+            icon: "success",
+        });        
         ///Limpiar el formulario
         document.querySelector("#frmAgregar").reset();
         ///Cerrar el modal
         modal.close();
         getTeamMembers(); ///Actualizar la tabla
-    }else{
+    } else {
         alert("Error al agregar el integrante");
     }
 })
-async function deleteMember(id){
+async function deleteMember(id) {
     const confirmacion = confirm("¿Estás seguro de eliminar este integrante?");
-    if(confirmacion){
-        await fetch(`${API_URL}/${id}`,{
+    if (confirmacion) {
+        await fetch(`${API_URL}/${id}`, {
             method: "DELETE"
         });
         ///Recargar la tabla
@@ -99,4 +102,26 @@ async function deleteMember(id){
     }
 }
 
+const modalEditar = document.querySelector("#modalEditar");
+const btnCerrarEditar = document.querySelector("#btnCloseEditar");
 
+
+btnCerrarEditar.addEventListener("click", () => {
+    modalEditar.close();
+})
+
+
+function openEditModal(id, nombre, apellido, email, rol){
+    ///Se asignan los valores de los campos del formulario de edición a los campos del modal de edición
+    document.querySelector("#txtIdEditar").value = id;
+    document.querySelector("#txtNombreEditar").value = nombre;
+    document.querySelector("#txtApellidoEditar").value = apellido;
+    document.querySelector("#txtEmailEditar").value = email;
+    document.querySelector("#txtCodigoEditar").value = rol;
+
+    ///Abrimos el modal despues de pasar los valores
+    modalEditar.showModal();
+}
+async function editMember(params) {
+    
+}

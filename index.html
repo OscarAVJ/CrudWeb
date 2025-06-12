@@ -45,7 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Aqui van las filas que iteraremos con javascript provenientes de la API -->
+                    <!--/ Aqui van las filas que iteraremos con javascript provenientes de la API -->
                 </tbody>
             </table>
         </div>
@@ -66,8 +66,26 @@
 
             </form>
         </article>
-     </dialog>
-    <!-- Boton flotante para agregar integrantes -->
+    </dialog>
+    <!-- /EDITAR -->
+    <dialog id="modalEditar">
+        <article>
+            <header>
+                <a href="" class="close" id="btnCloseEditar"></a>
+                <h3>Editar integrante</h3>
+            </header>
+            <form id="frmEditar" style="border-radius: 20px;">
+                <input type="hidden" id="txtIdEditar">
+                <input type="text" id="txtNombreEditar" placeholder="Nombre" required>
+                <input type="text" id="txtApellidoEditar" placeholder="Apellido" required>
+                <input type="email" id="txtEmailEditar" placeholder="Email" required>
+                <input type="text" id="txtCodigoEditar" placeholder="Codigo" required>
+                <button type="submit" class="contrast">Guardar</button>
+
+            </form>
+        </article>
+    </dialog>
+    <!--/ Boton flotante para agregar integrantes -->
     <button id="btnAgregar" class="add-btn">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -77,8 +95,10 @@
             <path d="M12 8v8" />
         </svg>
     </button>
-    
+
     <script src="/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>
