@@ -81,7 +81,7 @@ document.querySelector("#frmAgregar").addEventListener("submit", async e => {
             title: "BIENNN!",
             text: "Usuario expo agregado!",
             icon: "success",
-        });        
+        });
         ///Limpiar el formulario
         document.querySelector("#frmAgregar").reset();
         ///Cerrar el modal
@@ -111,7 +111,7 @@ btnCerrarEditar.addEventListener("click", () => {
 })
 
 
-function openEditModal(id, nombre, apellido, email, rol){
+function openEditModal(id, nombre, apellido, email, rol) {
     ///Se asignan los valores de los campos del formulario de edición a los campos del modal de edición
     document.querySelector("#txtIdEditar").value = id;
     document.querySelector("#txtNombreEditar").value = nombre;
@@ -122,6 +122,55 @@ function openEditModal(id, nombre, apellido, email, rol){
     ///Abrimos el modal despues de pasar los valores
     modalEditar.showModal();
 }
-async function editMember(params) {
-    
-}
+
+document.querySelector("#frmEditar").addEventListener("submit", async e => {
+    e.preventDefault();///Evitar que el formulario se envie de un solo
+
+    ///Capturar los datos del formulario
+    const id = document.querySelector("#txtIdEditar").value;
+    const nombre = document.querySelector("#txtNombreEditar").value.trim();
+    const apellido = document.querySelector("#txtApellidoEditar").value.trim();
+    const email = document.querySelector("#txtEmailEditar").value.trim();
+    const rol = document.querySelector("#txtCodigoEditar").value.trim();
+    if (!nombre || !apellido || !email || !rol) {
+        Swal.fire({
+            title: "MALLL!",
+            text: "Campos vacios!",
+            icon: "error",
+        });
+        return;
+
+    }
+
+    const response = await fetch(
+        `${API_URL}/${id}`,{
+            method: "PUT",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            ///Convertir el objeto a JSON para enviarlo
+            body: JSON.stringify({
+                nombre,
+                apellido,
+                email,
+                rol
+            })
+        }
+    );
+      ///Validar la respuesta
+    if (response.ok) {
+        Swal.fire({
+            title: "BIENNN!",
+            text: "Usuario expo actualizado!",
+            icon: "success",
+        });
+        ///Limpiar el formulario
+        document.querySelector("#frmEditar").reset();
+        ///Cerrar el modal
+        modalEditar.close();
+        getTeamMembers(); ///Actualizar la tabla
+    } else {
+        alert("Error al agregar el integrante");
+    }
+
+})
